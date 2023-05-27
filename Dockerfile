@@ -15,12 +15,12 @@ RUN go build -ldflags '-w -s' -o E5SubBot .
 
 RUN apk update && apk add --no-cache ca-certificates
 
-COPY config.example.yml /app/build/config.yml
-
 FROM alpine:latest
 
 RUN apk add tzdata
-COPY --from=builder /app/build/E5SubBot /
+
+COPY --from=builder /app/E5SubBot /E5SubBot
+COPY config.example.yml /config.yml
 
 ENV DB_SLL_MODE true
 

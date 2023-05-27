@@ -57,6 +57,7 @@ changelog:
     - title: Others
       order: 4
 release:
+  draft: true
   github:
     owner: AmirulAndalib
     name: E5SubBot
