@@ -15,6 +15,8 @@ RUN go build -ldflags '-w -s' -o E5SubBot .
 
 RUN apk update && apk add --no-cache ca-certificates
 
+COPY config.example.yml .
+
 RUN mkdir build && cp E5SubBot build && mv config.example.yml build/config.yml
 
 FROM alpine:latest
