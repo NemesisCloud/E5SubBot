@@ -5,8 +5,6 @@ on:
   push:
     branches:
       - master
-    tags:
-      - v*
 
 permissions:
   contents: write
@@ -31,6 +29,7 @@ jobs:
         with:
           distribution: goreleaser
           version: latest
-          args: release --rm-dist
+          args: release --rm-dist --config .goreleaser.yml
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
