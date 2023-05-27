@@ -1,8 +1,8 @@
 package srv_client
 
 import (
-	"github.com/iyear/E5SubBot/db"
-	"github.com/iyear/E5SubBot/model"
+	"github.com/amirulandalib/E5SubBot/db"
+	"github.com/amirulandalib/E5SubBot/model"
 )
 
 func Add(c *model.Client) error {

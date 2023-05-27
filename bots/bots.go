@@ -2,9 +2,9 @@ package bots
 
 import (
 	"fmt"
-	"github.com/iyear/E5SubBot/config"
-	"github.com/iyear/E5SubBot/db"
-	"github.com/iyear/E5SubBot/logger"
+	"github.com/amirulandalib/E5SubBot/config"
+	"github.com/amirulandalib/E5SubBot/db"
+	"github.com/amirulandalib/E5SubBot/logger"
 	"go.uber.org/zap"
 	"golang.org/x/net/proxy"
 	tb "gopkg.in/tucnak/telebot.v2"
@@ -16,14 +16,14 @@ var bot *tb.Bot
 
 const (
 	logo = `
-  ______ _____ _____       _     ____        _   
- |  ____| ____/ ____|     | |   |  _ \      | |  
- | |__  | |__| (___  _   _| |__ | |_) | ___ | |_ 
- |  __| |___ \\___ \| | | | '_ \|  _ < / _ \| __|
- | |____ ___) |___) | |_| | |_) | |_) | (_) | |_ 
- |______|____/_____/ \__,_|_.__/|____/ \___/ \__|
-`
+		____    ____   ____     __     ___       __    _____  __
+		/ __/___/ __/  / __/_ __/ /    / _ )___  / /_  / __/ |/ /
+	   / _//___/__ \  _\ \/ // / _ \  / _  / _ \/ __/ / _//    / 
+	  /___/   /____/ /___/\_,_/_.__/ /____/\___/\__/ /___/_/|_/  
+				Translated to English by @amirulandalib
+	`
 )
+
 
 func Start() {
 	var err error
@@ -67,7 +67,7 @@ func Start() {
 	fmt.Printf("Bot: %d %s\n", bot.Me.ID, bot.Me.Username)
 
 	makeHandlers()
-	fmt.Println("Bot Start")
+	fmt.Println("Bot Started successfully")
 	fmt.Println("------------")
 	bot.Start()
 }

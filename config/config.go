@@ -10,15 +10,22 @@ import (
 
 const (
 	LogBasePath    string = "./log/"
-	WelcomeContent string = "欢迎使用E5SubBot!"
+	WelcomeContent string = "Welcome you to using @AmirulsE5subBot!"
 	HelpContent    string = `
-	命令：
-	/my 查看已绑定账户信息
-	/bind  绑定新账户
-	/unbind 解绑账户
-	/export 导出账户信息(JSON)
-	/help 帮助
-	源码及使用方法：https://github.com/iyear/E5SubBot
+	Commands :
+
+	/my View your bound account information
+
+	/bind bind a new account.
+
+	/unbind Unbind the account used to bind previously on this bot.
+
+	/export Export account information as a [.json file] and upload it to telegram.
+
+	/help send this message.
+
+
+	For any question or problems related to this bot feel free to take help from @amirulislam
 `
 )
 

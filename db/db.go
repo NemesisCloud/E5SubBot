@@ -2,8 +2,8 @@ package db
 
 import (
 	"fmt"
-	"github.com/iyear/E5SubBot/config"
-	"github.com/iyear/E5SubBot/model"
+	"github.com/amirulandalib/E5SubBot/config"
+	"github.com/amirulandalib/E5SubBot/model"
 	"github.com/iyear/sqlite"
 	"go.uber.org/zap"
 	"gorm.io/driver/mysql"

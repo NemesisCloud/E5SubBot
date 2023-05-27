@@ -2,11 +2,11 @@ package bots
 
 import (
 	"fmt"
-	"github.com/iyear/E5SubBot/config"
-	"github.com/iyear/E5SubBot/model"
-	"github.com/iyear/E5SubBot/pkg/microsoft"
-	"github.com/iyear/E5SubBot/service/srv_client"
-	"github.com/iyear/E5SubBot/util"
+	"github.com/amirulandalib/E5SubBot/config"
+	"github.com/amirulandalib/E5SubBot/model"
+	"github.com/amirulandalib/E5SubBot/pkg/microsoft"
+	"github.com/amirulandalib/E5SubBot/service/srv_client"
+	"github.com/amirulandalib/E5SubBot/util"
 	"github.com/tidwall/gjson"
 	"go.uber.org/zap"
 	tb "gopkg.in/tucnak/telebot.v2"
@@ -16,12 +16,12 @@ import (
 
 func bBind(m *tb.Message) {
 	bot.Send(m.Chat,
-		fmt.Sprintf("👉 应用注册： [点击直达](%s)", microsoft.GetRegURL()),
+		fmt.Sprintf("👉 App registration: [click here for redirection](%s)", microsoft.GetRegURL()),
 		tb.ModeMarkdown,
 	)
 
 	bot.Send(m.Chat,
-		"⚠ 请回复 `client_id(空格)client_secret`",
+		"⚠ Please reply with your `client_id(space)client_secret`",
 		&tb.SendOptions{ParseMode: tb.ModeMarkdown,
 			ReplyMarkup: &tb.ReplyMarkup{ForceReply: true}},
 	)
@@ -32,23 +32,23 @@ func bBind(m *tb.Message) {
 
 func bBind1(m *tb.Message) {
 	if !m.IsReply() {
-		bot.Send(m.Chat, "⚠ 请通过回复方式绑定")
+		bot.Send(m.Chat, "⚠ Please bind your account by replying to this message")
 		return
 	}
 	tmp := strings.Split(m.Text, " ")
 	if len(tmp) != 2 {
-		bot.Send(m.Chat, "⚠ 错误的格式")
+		bot.Send(m.Chat, "⚠ Bad format")
 		return
 	}
 	id := tmp[0]
 	secret := tmp[1]
 	bot.Send(m.Chat,
-		fmt.Sprintf("👉 授权账户： [点击直达](%s)", microsoft.GetAuthURL(id)),
+		fmt.Sprintf("👉 Authorize your account: [click here for redirection](%s)", microsoft.GetAuthURL(id)),
 		tb.ModeMarkdown,
 	)
 
 	bot.Send(m.Chat,
-		"⚠ 请回复`http://localhost/……(空格)别名`(用于管理)",
+		"⚠ Please reply with the format eg:---->>> `http://localhost/……...(space) Name or Alias` (for management tag)\n\n example format: `http://localhost/e5sub?code=0.8yruhw8ry847r amirul`",
 		&tb.SendOptions{ParseMode: tb.ModeMarkdown,
 			ReplyMarkup: &tb.ReplyMarkup{ForceReply: true},
 		},
@@ -60,18 +60,18 @@ func bBind1(m *tb.Message) {
 
 func bBind2(m *tb.Message) {
 	if !m.IsReply() {
-		bot.Send(m.Chat, "⚠ 请通过回复方式绑定")
+		bot.Send(m.Chat, "⚠ Please Bind your account by replying to this message")
 		return
 	}
 	if len(srv_client.GetClients(m.Chat.ID)) == config.BindMaxNum {
-		bot.Send(m.Chat, "⚠ 已经达到最大可绑定数")
+		bot.Send(m.Chat, "⚠ You reached the maximum number of bindings!!")
 		return
 	}
-	bot.Send(m.Chat, "正在绑定中……")
+	bot.Send(m.Chat, "Binding The Account...")
 
 	tmp := strings.Split(m.Text, " ")
 	if len(tmp) != 2 {
-		bot.Send(m.Chat, "😥 错误的格式")
+		bot.Send(m.Chat, "😥 Bad format please add a space and a name after the localhost url\n\n example format: `http://localhost/e5sub?code=0.8yruhw8ry847r amirul`")
 	}
 	code := util.GetURLValue(tmp[0], "code")
 	alias := tmp[1]
@@ -81,14 +81,14 @@ func bBind2(m *tb.Message) {
 
 	refresh, err := microsoft.GetTokenWithCode(id, secret, code)
 	if err != nil {
-		bot.Send(m.Chat, fmt.Sprintf("无法获取RefreshToken ERROR:%s", err))
+		bot.Send(m.Chat, fmt.Sprintf("Unable to get RefreshToken ERROR:%s", err))
 		return
 	}
-	bot.Send(m.Chat, "🎉 Token获取成功!")
+	bot.Send(m.Chat, "🎉 Account Token obtained successfully!")
 
 	refresh, info, err := microsoft.GetUserInfo(id, secret, refresh)
 	if err != nil {
-		bot.Send(m.Chat, fmt.Sprintf("无法获取用户信息 ERROR:%s", err))
+		bot.Send(m.Chat, fmt.Sprintf("Unable to get user information ERROR:%s", err))
 		return
 	}
 	c := &model.Client{
@@ -102,7 +102,7 @@ func bBind2(m *tb.Message) {
 	}
 
 	if srv_client.IsExist(c.TgId, c.ClientId) {
-		bot.Send(m.Chat, "⚠ 该应用已经绑定过了，无需重复绑定")
+		bot.Send(m.Chat, "⚠ The account been bounded already, no need to bind it again")
 		return
 	}
 
@@ -115,11 +115,11 @@ func bBind2(m *tb.Message) {
 	)
 
 	if err = srv_client.Add(c); err != nil {
-		bot.Send(m.Chat, "😥 用户写入数据库失败")
+		bot.Send(m.Chat, "😥 User information's failed to write to database")
 		return
 	}
 
-	bot.Send(m.Chat, "✨ 绑定成功!")
+	bot.Send(m.Chat, "✨ The binding is successful!\nNow sit back and relax you dont need to do anything.\nThe Bot will send you account status message every 6 hours..")
 	delete(UserStatus, m.Chat.ID)
 	delete(UserClientId, m.Chat.ID)
 	delete(UserClientSecret, m.Chat.ID)
@@ -140,7 +140,7 @@ func bUnBind(m *tb.Message) {
 	}
 
 	bot.Send(m.Chat,
-		fmt.Sprintf("⚠ 选择一个账户将其解绑\n\n当前绑定数: %d/%d", len(srv_client.GetClients(m.Chat.ID)), config.BindMaxNum),
+		fmt.Sprintf("⚠ Select an account to unbind it\n\nCurrent Number of bound accounts: %d/%d", len(srv_client.GetClients(m.Chat.ID)), config.BindMaxNum),
 		&tb.ReplyMarkup{InlineKeyboard: inlineKeys},
 	)
 }
@@ -151,9 +151,9 @@ func bUnBindInlineBtn(c *tb.Callback) {
 			"error", err,
 			"id", c.Data,
 		)
-		bot.Send(c.Message.Chat, "⚠ 解绑失败!")
+		bot.Send(c.Message.Chat, "⚠ Unbinding failed!")
 		return
 	}
-	bot.Send(c.Message.Chat, "✨ 解绑成功!")
+	bot.Send(c.Message.Chat, "✨ Unbound successfully!")
 	bot.Respond(c)
 }

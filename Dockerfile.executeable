@@ -1,0 +1,12 @@
+FROM alpine:latest
+
+WORKDIR /app
+
+COPY . .
+
+RUN apk update && apk upgrade && apk add --no-cache ca-certificates wget curl bash sudo tzdata
+
+ENV DB_SLL_MODE true
+
+RUN chmod 777 ./E5SubBot && chmod +x ./E5SubBot
+CMD ["./E5SubBot"]

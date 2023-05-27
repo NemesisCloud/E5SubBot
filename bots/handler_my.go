@@ -2,8 +2,8 @@ package bots
 
 import (
 	"fmt"
-	"github.com/iyear/E5SubBot/config"
-	"github.com/iyear/E5SubBot/service/srv_client"
+	"github.com/amirulandalib/E5SubBot/config"
+	"github.com/amirulandalib/E5SubBot/service/srv_client"
 	tb "gopkg.in/tucnak/telebot.v2"
 	"strconv"
 	"time"
@@ -41,18 +41,18 @@ func bMy(m *tb.Message) {
 	}
 
 	bot.Send(m.Chat,
-		fmt.Sprintf("✨ 选择一个账户查看具体信息\n\n绑定数: %d/%d", len(srv_client.GetClients(m.Chat.ID)), config.BindMaxNum),
+		fmt.Sprintf("✨Select an account below to view its specific information\n\nNumber of bound Accounts: %d/%d", len(srv_client.GetClients(m.Chat.ID)), config.BindMaxNum),
 		&tb.ReplyMarkup{InlineKeyboard: inlineKeys})
 }
 func bMyInlineBtn(c *tb.Callback) {
 	id, _ := strconv.Atoi(c.Data)
 	client, err := srv_client.GetClient(id)
 	if err != nil {
-		bot.Send(c.Message.Chat, "获取账户信息失败")
+		bot.Send(c.Message.Chat, "Failed to get account information!")
 		return
 	}
 	bot.Send(c.Message.Chat,
-		fmt.Sprintf("🔎 信息\n别名：%s\nms_id: %s\nclient_id: %s\nclient_secret: %s\n最近更新时间: %s",
+		fmt.Sprintf("🔎 Account Information\nAlias:：%s\nms_id: %s\nclient_id: %s\nclient_secret: %s\nLast update: %s",
 			client.Alias,
 			client.MsId,
 			client.ClientId,
@@ -70,6 +70,6 @@ func bOnText(m *tb.Message) {
 	case StatusBind2:
 		bBind2(m)
 	default:
-		bot.Send(m.Chat, "✨ 发送 /help 获取帮助嗷")
+		bot.Send(m.Chat, "✨ Send /help to get help.")
 	}
 }

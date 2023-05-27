@@ -1,32 +1,35 @@
-<img src="https://github.com/iyear/E5SubBot/raw/master/pics/office.png" alt="logo" width="130" height="130" align="left" />
+<img src="https://github.com/amirulandalib/E5SubBot/raw/master/pics/office.png" alt="logo" width="130" height="130" align="left" />
 
 <h1>E5SubBot</h1>
 
-> A Simple Telebot for E5 Renewal
+> A Simple Telebot for E5 Renewal but in ENGLISH 🥵.
 
 <br/>
 
-![](https://img.shields.io/github/go-mod/go-version/iyear/E5SubBot?style=flat-square)
+## Original Author: https://github.com/iyear/E5SubBot
+
+![](https://img.shields.io/github/go-mod/go-version/amirulandalib/E5SubBot?style=flat-square)
 ![](https://img.shields.io/badge/license-GPL-lightgrey.svg?style=flat-square)
-![](https://img.shields.io/github/v/release/iyear/E5SubBot?color=red&style=flat-square)
-![](https://img.shields.io/github/last-commit/iyear/E5SubBot?style=flat-square)
-![](https://img.shields.io/github/downloads/iyear/E5SubBot/total?style=flat-square)
+![](https://img.shields.io/github/v/release/amirulandalib/E5SubBot?color=red&style=flat-square)
+![](https://img.shields.io/github/last-commit/amirulandalib/E5SubBot?style=flat-square)
+![](https://img.shields.io/github/downloads/amirulandalib/E5SubBot/total?style=flat-square)
 
-![](https://img.shields.io/github/workflow/status/iyear/E5SubBot/Docker%20Build?label=docker%20build&style=flat-square)
-![](https://img.shields.io/docker/v/iyear/e5subbot?label=docker%20tag&style=flat-square)
-![](https://img.shields.io/docker/image-size/iyear/e5subbot?style=flat-square&label=docker%20image%20size)
+![](https://img.shields.io/github/workflow/status/amirulandalib/E5SubBot/Docker%20Build?label=docker%20build&style=flat-square)
+![](https://img.shields.io/docker/v/ghcr.io/amirulandalib/e5sub_mod?label=docker%20tag&style=flat-square)
+![](https://img.shields.io/docker/image-size/ghcr.io/amirulandalib/e5sub_mod?style=flat-square&label=docker%20image%20size)
 
-English | [简体中文](https://github.com/iyear/E5SubBot/blob/master/README_zhCN.md) | [Telegram Chat](https://t.me/e5subbot)
+English | [Telegram Chat UO](https://t.me/kangershub) | [Telegram Chat Official](https://t.me/e5subbot)
 
-DEMO: https://t.me/E5Sub_bot
+DEMO: https://t.me/E5Sub_bot (chinese)
 
 ## Feature
 
-- Automatically Renew E5 Subscription(Customizable Frequency)
+- Automatically Renew E5 Subscription(Customizable Cron)
 - Manageable Simple Account System
 - Available Task Execution Feedback
 - Convenient Authorization
 - Use concurrency to speed up
+- Backup database to MySQL database
 
 ## Principle
 
@@ -60,7 +63,7 @@ Support `amd64` `386` `arm64` `arm/v6` `arm/v7` arch
 
 ```shell
 #launch,you can set the time zone you want
-docker run --name e5sub -e TZ="Asia/Shanghai" --restart=always -d iyear/e5subbot:latest
+docker run --name e5subbot -e TZ="Asia/Kolkata" --restart=always -d ghcr.io/amirulandalib/e5subbot:latest
 
 #view logs
 docker logs -f e5sub
@@ -82,7 +85,7 @@ docker cp e5sub:/config.yml .
 
 ### Binary Deployment
 
-Download the binary files of the corresponding system on the [Releases](https://github.com/iyear/E5SubBot/releases) page
+Download the binary files of the corresponding system on the [Releases](https://github.com/amirulandalib/E5SubBot/releases) page
 and upload it to the server
 
 Windows: Start `E5SubBot.exe`
@@ -101,12 +104,12 @@ chmod +x E5SubBot
 Download the source code and install the GO environment
 
 ```shell
-git clone https://github.com/iyear/E5SubBot.git && cd E5SubBot && go build
+git clone https://github.com/amirulandalib/E5SubBot.git && cd E5SubBot && go build
 ```
 
 ## Configuration
 
-Create `config.yml` in the same directory, encoded as `UTF-8`
+Rename `config.yml.example` to `config.yml`in the same directory, encoded as `UTF-8`
 
 Configuration Template:
 

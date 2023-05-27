@@ -1,4 +1,4 @@
-module github.com/iyear/E5SubBot
+module github.com/amirulandalib/E5SubBot
 
 go 1.20
 
