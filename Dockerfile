@@ -5,25 +5,22 @@ WORKDIR /app
 ENV GO111MODULE=on \
     CGO_ENABLED=0
 
-# cache
-COPY go.mod go.mod
-COPY go.sum go.sum
+# Cache dependencies
+COPY go.mod go.sum ./
 RUN go mod download
 
 COPY . .
+
 RUN go build -ldflags '-w -s' -o E5SubBot .
 
 RUN apk update && apk add --no-cache ca-certificates
 
-COPY config.example.yml .
-
-RUN mkdir build && cp E5SubBot build && mv config.example.yml build/config.yml
+COPY config.example.yml /app/build/config.yml
 
 FROM alpine:latest
 
 RUN apk add tzdata
-COPY --from=builder /app/build /
-COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=builder /app/build/E5SubBot /
 
 ENV DB_SLL_MODE true
 
