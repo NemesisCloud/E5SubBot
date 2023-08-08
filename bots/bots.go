@@ -20,7 +20,7 @@ const (
 		/ __/___/ __/  / __/_ __/ /    / _ )___  / /_  / __/ |/ /
 	   / _//___/__ \  _\ \/ // / _ \  / _  / _ \/ __/ / _//    / 
 	  /___/   /____/ /___/\_,_/_.__/ /____/\___/\__/ /___/_/|_/  
-				Translated to English by @amirulandalib
+				Translated to English by @CaptainLightyear
 	`
 )
 
