@@ -20,8 +20,7 @@ FROM alpine:latest
 RUN apk add tzdata
 
 COPY --from=builder /app/E5SubBot /E5SubBot
-COPY config.example.yml /config.yml
-
+COPY . .
 ENV DB_SLL_MODE true
 
 ENTRYPOINT ["/E5SubBot"]
