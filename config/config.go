@@ -10,7 +10,7 @@ import (
 
 const (
 	LogBasePath    string = "./log/"
-	WelcomeContent string = "Welcome you to using @AmirulsE5subBot!"
+	WelcomeContent string = "Welcome!"
 	HelpContent    string = `
 	Commands :
 
@@ -23,9 +23,6 @@ const (
 	/export Export account information as a [.json file] and upload it to telegram.
 
 	/help send this message.
-
-
-	For any question or problems related to this bot feel free to take help from @amirulislam
 `
 )
 
